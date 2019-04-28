@@ -1,8 +1,8 @@
 #include <iostream>
 
-void PrintIntroduction()
+void PrintIntroduction(int & nLevelDifficulty)
 {
-    std::wcout << L"You're a secret agent breaking into a secure server room..." << std::endl;
+    std::wcout << L"You're a secret agent breaking into a level " << nLevelDifficulty << " secure server room..." << std::endl;
     std::wcout << L"You need to enter the correct codes to continue..." << std::endl;
     std::wcout << std::endl;
 }
@@ -23,9 +23,9 @@ void PrintGuessDebug(int & GuessA, int & GuessB, int & GuessC, int & GuessProduc
     std::wcout << L"DEBUG: Your guess sum is: " << GuessSum << std::endl;
 }
 
-void PlayGame()
+bool PlayGame(int & nLevelDifficulty)
 {
-    PrintIntroduction();
+    PrintIntroduction(nLevelDifficulty);
 
     // Declare three read-only values for the "secret code"
     const int CodeA = 4;
@@ -54,16 +54,31 @@ void PlayGame()
     if (GuessProduct == CodeProduct && GuessSum == CodeSum)
     {
         std::wcout << L"You guessed correctly!" << std::endl;
+        return true;
     }
     else
     {
         std::wcout << L"These are the wrong numbers! :(" << std::endl;
+        return false;
     }    
 }
 
 int wmain(int argc, wchar_t argv[])
 {
-    PlayGame();
+    int nLevelDifficulty = 1;
+    
+    while (true)
+    {
+        bool bLevelComplete = PlayGame(nLevelDifficulty);
+
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        if (bLevelComplete)
+        {
+            nLevelDifficulty++;
+        }
+    }
 
     return 0;
 }

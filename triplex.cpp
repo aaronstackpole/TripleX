@@ -169,7 +169,7 @@ void PrintIntroduction(std::shared_ptr<Difficulty> & pDifficulty)
 }
 
 // Print code clues and input prompt
-void PrintCluesAndPrompt(std::shared_ptr<Codes> & pCodes, std::shared_ptr<Difficulty> & pDifficulty)
+void PrintCluesAndPrompt(std::shared_ptr<Codes> & pCodes)
 {
     std::wcout << L"\tThere are 3 numbers in the code" << std::endl;
     std::wcout << L"\tThe product of the numbers is " << pCodes->GetCodeProduct() << std::endl;
@@ -190,7 +190,7 @@ bool PlayLevel(std::shared_ptr<Difficulty> & pDifficulty, std::shared_ptr<Codes>
 {
     PrintIntroduction(pDifficulty);
 
-    PrintCluesAndPrompt(pCodes, pDifficulty);
+    PrintCluesAndPrompt(pCodes);
 
     // Declare variables and capture user input
     int GuessA, GuessB, GuessC;

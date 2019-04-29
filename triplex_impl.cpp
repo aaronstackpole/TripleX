@@ -1,89 +1,87 @@
-#include <iostream>
 #include <cassert>
-
 #include "triplex_impl.hpp"
 
-void Difficulty::SetDifficulty(int difficulty)
+void TripleX::Difficulty::SetDifficulty(int difficulty)
 {
     assert(difficulty >= MIN_DIFFICULTY && difficulty <= MAX_DIFFICULTY);
 
     mDifficulty = difficulty;
 }
 
-void Difficulty::IncrementDifficulty()
+void TripleX::Difficulty::IncrementDifficulty()
 {
     mDifficulty++;
 
     if (mDifficulty >= MAX_DIFFICULTY) mDifficulty = MAX_DIFFICULTY;
 }
 
-void Difficulty::DecrementDifficulty()
+void TripleX::Difficulty::DecrementDifficulty()
 {
     mDifficulty--;
 
     if (mDifficulty <= MIN_DIFFICULTY) mDifficulty = MIN_DIFFICULTY;
 }
 
-int const & Difficulty::GetDifficulty()
+int const & TripleX::Difficulty::GetDifficulty()
 {
     return mDifficulty;
 }
 
-void Clues::UpdateSum()
+void TripleX::Clues::UpdateSum()
 {
     mClueSum = mClueA + mClueB + mClueC;
 }
 
-void Clues::UpdateProduct()
+void TripleX::Clues::UpdateProduct()
 {
     mClueProduct = mClueA * mClueB * mClueC;
 }
 
-void Clues::SetNumbers(int numberA, int numberB, int numberC)
+void TripleX::Clues::SetNumbers(int numberA, int numberB, int numberC)
 {
     mClueA = numberA;
     mClueB = numberB;
     mClueC = numberC;
 
-    Clues::UpdateSum();
-    Clues::UpdateProduct();
+    TripleX::Clues::UpdateSum();
+    TripleX::Clues::UpdateProduct();
 }
 
-int const & Clues::GetClueA()
+int const & TripleX::Clues::GetClueA()
 {
     return mClueA;
 }
 
-int const & Clues::GetClueB()
+int const & TripleX::Clues::GetClueB()
 {
     return mClueB;
 }
 
-int const & Clues::GetClueC()
+int const & TripleX::Clues::GetClueC()
 {
     return mClueC;
 }
 
-int const & Clues::GetClueSum()
+int const & TripleX::Clues::GetClueSum()
 {
     return mClueSum;
 }
 
-int const & Clues::GetClueProduct()
+int const & TripleX::Clues::GetClueProduct()
 {
     return mClueProduct;
 }
 
-void Guesses::UpdateSum()
+void TripleX::Guesses::UpdateSum()
 {
     mGuessSum = mGuessA + mGuessB + mGuessC;
 }
 
-void Guesses::UpdateProduct()
+void TripleX::Guesses::UpdateProduct()
 {
     mGuessProduct = mGuessA * mGuessB * mGuessC;
 }
-void Guesses::SetNumbers(int numberA, int numberB, int numberC)
+void TripleX::Guesses::SetNumbers(int numberA, int numberB, int numberC)
 {
     mGuessA = numberA;
     mGuessB = numberB;
@@ -93,39 +91,39 @@ void Guesses::SetNumbers(int numberA, int numberB, int numberC)
     Guesses::UpdateProduct();
 }
 
-int const & Guesses::GetGuessA()
+int const & TripleX::Guesses::GetGuessA()
 {
     return mGuessA;
 }
 
-int const & Guesses::GetGuessB()
+int const & TripleX::Guesses::GetGuessB()
 {
     return mGuessB;
 }
 
-int const & Guesses::GetGuessC()
+int const & TripleX::Guesses::GetGuessC()
 {
     return mGuessC;
 }
 
-int const & Guesses::GetGuessSum()
+int const & TripleX::Guesses::GetGuessSum()
 {
     return mGuessSum;
 }
 
-int const & Guesses::GetGuessProduct()
+int const & TripleX::Guesses::GetGuessProduct()
 {
     return mGuessProduct;
 }
 
-void PrintIntroduction(std::shared_ptr<Difficulty> & pDifficulty)
+void TripleX::PrintIntroduction(DifficultyPtr & pDifficulty)
 {
     std::wcout << L"You're a secret agent breaking into a level " << pDifficulty->GetDifficulty() << " secure server room..." << std::endl;
     std::wcout << L"You need to enter the correct codes to continue..." << std::endl;
     std::wcout << std::endl;
 }
 
-void PrintCluesAndPrompt(std::shared_ptr<Clues> & pClues)
+void TripleX::PrintCluesAndPrompt(CluesPtr & pClues)
 {
     std::wcout << L"\tThere are 3 numbers in the code" << std::endl;
     std::wcout << L"\tThe product of the numbers is " << pClues->GetClueProduct() << std::endl;
@@ -134,25 +132,25 @@ void PrintCluesAndPrompt(std::shared_ptr<Clues> & pClues)
     std::wcout << L"Enter your guesses (separated by spaces, i.e. 1 2 3): ";
 }
 
-void PrintGuessDebug(std::shared_ptr<Guesses> & pGuesses)
+void TripleX::PrintGuessDebug(GuessesPtr & pGuesses)
 {
     std::wcout << L"DEBUG: You entered: " << pGuesses->GetGuessA() << " " << pGuesses->GetGuessB() << " " << pGuesses->GetGuessC() << std::endl;
     std::wcout << L"DEBUG: Your guess product is: " << pGuesses->GetGuessProduct() << std::endl;
     std::wcout << L"DEBUG: Your guess sum is: " << pGuesses->GetGuessSum() << std::endl;
 }
 
-void PrintCluesDebug(std::shared_ptr<Clues> & pClues)
+void TripleX::PrintCluesDebug(CluesPtr & pClues)
 {
     std::wcout << L"DEBUG: Clue codes are: " << pClues->GetClueA() << " " << pClues->GetClueB() << " " << pClues->GetClueC() << std::endl;
 }
 
-bool PlayLevel(std::shared_ptr<Difficulty> & pDifficulty, std::shared_ptr<Clues> & pClues, std::shared_ptr<Guesses> & pGuesses)
+bool TripleX::PlayLevel(DifficultyPtr & pDifficulty, CluesPtr & pClues, GuessesPtr & pGuesses)
 {
-    PrintIntroduction(pDifficulty);
+    TripleX::PrintIntroduction(pDifficulty);
 
-    PrintCluesDebug(pClues);
+    TripleX::PrintCluesDebug(pClues);
 
-    PrintCluesAndPrompt(pClues);
+    TripleX::PrintCluesAndPrompt(pClues);
 
     // Declare variables and capture user input
     int GuessA, GuessB, GuessC;
@@ -167,14 +165,14 @@ bool PlayLevel(std::shared_ptr<Difficulty> & pDifficulty, std::shared_ptr<Clues>
     // Copy input to Guesses class
     pGuesses->SetNumbers(GuessA, GuessB, GuessC);
 
-    PrintGuessDebug(pGuesses);
+    TripleX::PrintGuessDebug(pGuesses);
 
     // Test if guess calculations are the same as code calculations
     if (pGuesses->GetGuessProduct() == pClues->GetClueProduct() && pGuesses->GetGuessSum() == pClues->GetClueSum())
     {
         std::wcout << L"You guessed correctly!" << std::endl;
         std::wcout << std::endl;
-        
+
         return true;
     }
     else

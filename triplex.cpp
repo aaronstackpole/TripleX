@@ -1,13 +1,13 @@
-#include <iostream>
-
 #include "triplex_impl.hpp"
+
+using namespace TripleX;
 
 int wmain(int argc, wchar_t argv[])
 {
     // Instantiate data classes
-    std::shared_ptr<Difficulty> pDifficulty = std::make_shared<Difficulty>();
-    std::shared_ptr<Clues> pClues = std::make_shared<Clues>();
-    std::shared_ptr<Guesses> pGuesses = std::make_shared<Guesses>();
+    DifficultyPtr pDifficulty = std::make_shared<Difficulty>();
+    CluesPtr pClues = std::make_shared<Clues>();
+    GuessesPtr pGuesses = std::make_shared<Guesses>();
     
     while (true)
     {

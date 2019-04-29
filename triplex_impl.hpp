@@ -1,11 +1,12 @@
-#include <iostream>
+#pragma once
+
 #include <memory>
 
 namespace TripleX
 {
     // Game play difficulty tuning values
     auto constexpr MIN_DIFFICULTY = 2;
-    auto constexpr MAX_DIFFICULTY = 11;
+    auto constexpr MAX_DIFFICULTY = 9;
 
     // Contains game state values to provide dynamic challenge
     class Difficulty

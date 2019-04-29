@@ -1,4 +1,6 @@
 #include <cassert>
+#include <iostream>
+
 #include "triplex_impl.hpp"
 
 void TripleX::Difficulty::SetDifficulty(int difficulty)

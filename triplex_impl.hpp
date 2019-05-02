@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <random>
 
 namespace TripleX
 {
@@ -19,7 +20,7 @@ namespace TripleX
         void IncrementDifficulty();
         void DecrementDifficulty();
     };
-    using DifficultyPtr = std::shared_ptr<Difficulty>;
+    using DifficultyPtr = std::unique_ptr<Difficulty>;
 
     // Clues and Guesses basic number interface
     class INumbers
@@ -53,7 +54,7 @@ namespace TripleX
         int const & GetClueSum();
         int const & GetClueProduct();
     };
-    using CluesPtr = std::shared_ptr<Clues>;
+    using CluesPtr = std::unique_ptr<Clues>;
 
     // To store codes input by the user
     class Guesses : public INumbers
@@ -77,18 +78,21 @@ namespace TripleX
         int const & GetGuessSum();
         int const & GetGuessProduct();
     };
-    using GuessesPtr = std::shared_ptr<Guesses>;
+    using GuessesPtr = std::unique_ptr<Guesses>;
+
+    // Generate a random integer in the range provided
+    int GetRandomRange(int min, int max);
 
     // Execute the main game logic once and return success
-    bool PlayLevel(DifficultyPtr & pDifficulty, CluesPtr & pClues, GuessesPtr & pGuesses);
+    bool PlayLevel(DifficultyPtr const & pDifficulty, CluesPtr const & pClues, GuessesPtr const & pGuesses);
 
     // Print welcome messages to the terminal
-    void PrintIntroduction(DifficultyPtr & pDifficulty);
+    void PrintIntroduction(DifficultyPtr const & pDifficulty);
     // Print code clues and input prompt
-    void PrintCluesAndPrompt(CluesPtr & pClues);
+    void PrintCluesAndPrompt(CluesPtr const & pClues);
 
     // Output some debug messages about the captured input and calculations
-    void PrintGuessDebug(GuessesPtr & pGuesses);
+    void PrintGuessDebug(GuessesPtr const & pGuesses);
     // Output some debug messages about the generated codes
-    void PrintCluesDebug(CluesPtr & pClues);
+    void PrintCluesDebug(CluesPtr const & pClues);
 }

@@ -6,9 +6,9 @@
 int wmain(int argc, wchar_t argv[])
 {
     // Instantiate data classes
-    TripleX::DifficultyPtr pDifficulty = std::make_shared<TripleX::Difficulty>();
-    TripleX::CluesPtr pClues = std::make_shared<TripleX::Clues>();
-    TripleX::GuessesPtr pGuesses = std::make_shared<TripleX::Guesses>();
+    TripleX::DifficultyPtr pDifficulty = std::make_unique<TripleX::Difficulty>();
+    TripleX::CluesPtr pClues = std::make_unique<TripleX::Clues>();
+    TripleX::GuessesPtr pGuesses = std::make_unique<TripleX::Guesses>();
     
     while (true)
     {

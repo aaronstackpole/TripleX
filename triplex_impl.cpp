@@ -83,6 +83,7 @@ void TripleX::Guesses::UpdateProduct()
 {
     mGuessProduct = mGuessA * mGuessB * mGuessC;
 }
+
 void TripleX::Guesses::SetNumbers(int numberA, int numberB, int numberC)
 {
     mGuessA = numberA;
@@ -118,14 +119,24 @@ int const & TripleX::Guesses::GetGuessProduct()
     return mGuessProduct;
 }
 
-void TripleX::PrintIntroduction(DifficultyPtr & pDifficulty)
+int TripleX::GetRandomRange(int min, int max)
+{
+    assert(min < max);
+
+    static std::mt19937 engine{ std::random_device{}() };
+    std::uniform_int_distribution dist{ min, max };
+
+    return dist(engine);
+}
+
+void TripleX::PrintIntroduction(DifficultyPtr const & pDifficulty)
 {
     std::wcout << L"You're a secret agent breaking into a level " << pDifficulty->GetDifficulty() << " secure server room..." << std::endl;
     std::wcout << L"You need to enter the correct codes to continue..." << std::endl;
     std::wcout << std::endl;
 }
 
-void TripleX::PrintCluesAndPrompt(CluesPtr & pClues)
+void TripleX::PrintCluesAndPrompt(CluesPtr const & pClues)
 {
     std::wcout << L"\tThere are 3 numbers in the code" << std::endl;
     std::wcout << L"\tThe product of the numbers is " << pClues->GetClueProduct() << std::endl;
@@ -134,19 +145,19 @@ void TripleX::PrintCluesAndPrompt(CluesPtr & pClues)
     std::wcout << L"Enter your guesses (separated by spaces, i.e. 1 2 3): ";
 }
 
-void TripleX::PrintGuessDebug(GuessesPtr & pGuesses)
+void TripleX::PrintGuessDebug(GuessesPtr const & pGuesses)
 {
     std::wcout << L"DEBUG: You entered: " << pGuesses->GetGuessA() << " " << pGuesses->GetGuessB() << " " << pGuesses->GetGuessC() << std::endl;
     std::wcout << L"DEBUG: Your guess product is: " << pGuesses->GetGuessProduct() << std::endl;
     std::wcout << L"DEBUG: Your guess sum is: " << pGuesses->GetGuessSum() << std::endl;
 }
 
-void TripleX::PrintCluesDebug(CluesPtr & pClues)
+void TripleX::PrintCluesDebug(CluesPtr const & pClues)
 {
     std::wcout << L"DEBUG: Clue codes are: " << pClues->GetClueA() << " " << pClues->GetClueB() << " " << pClues->GetClueC() << std::endl;
 }
 
-bool TripleX::PlayLevel(DifficultyPtr & pDifficulty, CluesPtr & pClues, GuessesPtr & pGuesses)
+bool TripleX::PlayLevel(DifficultyPtr const & pDifficulty, CluesPtr const & pClues, GuessesPtr const & pGuesses)
 {
     TripleX::PrintIntroduction(pDifficulty);
 
